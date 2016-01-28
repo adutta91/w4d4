@@ -1,0 +1,15 @@
+<% submit_string = (user.persisted?) ? "Log In" : "Sign Up" %>
+<% action = (user.persisted?) ?  users_url : session_url %>
+
+<form action="<%= action %>" method="POST">
+  <%= auth_token %>
+  <label for="user_email">Email</label>
+  <input type="text" name="user[email]" value="<%=user.email %>">
+  <br>
+
+  <label for="user_password">Password</label>
+  <input type="password" name="user[password]">
+  <br>
+
+  <input type="submit" value="<%= submit_string %>">
+</form>

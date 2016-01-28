@@ -7,8 +7,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user.password = params[:password]
     if @user.save
+      login_user!
       render json: @user
     else
       flash.now[:errors] = @user.errors.full_messages
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password_digest, :session_token)
+    params.require(:user).permit(:email, :session_token)
   end
 
 end
