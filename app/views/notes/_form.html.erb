@@ -1,0 +1,21 @@
+<%= render 'shared/errors' %>
+
+<% action = @note.persisted? ? track_url(@note.track_id) : bands_url %>
+<% submit_string = @note.persisted? ? "Edit" : "Enter" %>
+<% method = @note.persisted? ? "PATCH" : "POST" %>
+
+<form action="<%= action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <%= auth_token %>
+
+  <label for="note_text">Name</label>
+  <input type="textarea" name="note[text]" value="<%= @note.text %>">
+  <br>
+
+  <input type="submit" value="<%= submit_string %>">
+</form>
+
+<p>
+  <%= link_to "<<< Bands", bands_url, method: :get %>
+</p>
