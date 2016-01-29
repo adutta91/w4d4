@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+u = User.new
+u.email = "arjundutta91@gmail.com"
+u.password = "musicapp"
+u.save!
 
 10.times do
   b = Band.new
@@ -35,8 +39,9 @@ end
 
 Track.all.each do |track|
   n = Note.new
-  n.user_id = 1
+  n.user_id = User.first.id
   n.track_id = track.id
-  n.text = ('a'..'z').to_a.sample * 5
+  n.title = Faker::Lorem.word
+  n.text = Faker::Hacker.say_something_smart
   n.save!
 end

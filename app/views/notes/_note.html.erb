@@ -1,0 +1,5 @@
+<% user = User.find_by(id: note.user_id) %>
+<div>
+  <h4>Note by <%= user.email %></h4>
+  <p class="note"><%= note.text %></p>
+</div>

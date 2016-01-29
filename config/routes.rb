@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'bands#index'
   resources :users, only: [:new, :create, :show]
   resource :session, only: [:new, :create, :destroy]
 
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
     resources :tracks, only: [:new]
   end
 
-  resources :tracks, except: [:index, :new]
+  resources :tracks, except: [:index, :new] do
+    resources :notes
+  end
 
-  resources :notes, except: [:index]
+
 
 end

@@ -12,6 +12,14 @@
 </p>
 
 <p>
+  <h4>Notes:</h4>
+  <%= render @track.notes %>
+</p>
+
+<p>
+  <p>
+    <%= link_to "Add Note", new_track_note_url(@track) %>
+  </p>
   <p>
     <%= link_to "Edit", edit_track_url(@track), method: :get %>
     <%= link_to "Destroy", track_url(@track), method: :delete %>
