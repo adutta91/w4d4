@@ -1,0 +1,21 @@
+<h3>Band Name: <%= @band.name %></h3>
+
+<h4>Albums:</h4>
+<ul>
+  <% @band.albums.each do |album| %>
+    <li><%= link_to album.title, album_url(album), method: :get %></li>
+  <% end %>
+</ul>
+
+
+<p>
+  <p>
+    <%= link_to "Edit", edit_band_url(@band), method: :get %>
+    <%= link_to "Destroy", band_url(@band), method: :delete %>
+    <p>
+      <%= link_to "Add New Band", new_band_url, method: :get %>
+    </p>
+
+  </p>
+  <%= link_to "<<< All Bands", bands_url, method: :get %>
+</p>

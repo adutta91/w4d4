@@ -1,0 +1,58 @@
+<%= render 'shared/errors' %>
+
+<% action = @album.persisted? ? album_url(@album) : albums_url %>
+<% submit_string = @album.persisted? ? "Edit" : "Enter" %>
+<% method = @album.persisted? ? "PATCH" : "POST" %>
+
+
+<form action="<%= action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <%= auth_token %>
+
+  <label for="album_title">Name</label>
+  <input type="text" name="album[title]" value="<%= @album.title %>">
+  <br>
+
+  <label for="recorded_live">Recorded Live</label>
+  <input
+    type="radio"
+    name="album[recorded]"
+    value="live"
+    id="recorded_live"
+    <%= @album.recorded == "live" ? "checked" : "" %>>
+  <br>
+
+  <label for="recorded_studio">Recorded in Studio</label>
+  <input
+    type="radio"
+    name="album[recorded]"
+    value="studio"
+    id="recorded_studio"
+    <%= @album.recorded == "studio" ? "checked" : "" %>>
+
+<br>
+<br>
+
+  <label for="band">Band</label>
+  <select name="album[band_id]" id="band">
+    <option></option>
+    <% Band.all.each do |band| %>
+      <option
+        <%= @album.band == band ? "selected" : "" %>
+        value="<%= band.id %>">
+        <%= band.name %>
+      </option>
+    <% end %>
+  </select>
+
+
+  <br>
+  <br>
+  <% @album.band_id = params[:band_id] %>
+  <input type="submit" value="<%= submit_string %>">
+</form>
+
+<p>
+  <%= link_to "<<< Bands", albums_url, method: :get %>
+</p>

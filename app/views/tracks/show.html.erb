@@ -1,0 +1,25 @@
+<h3>Song name: "<%= @track.title %>"</h3>
+
+<h4>
+  Band: <%= @track.band.name %>
+  <br>
+  Album: <%= @track.album.title %>
+</h4>
+
+<p>
+  <h4>Lyrics:</h4>
+</p>
+
+<p>
+  <p>
+    <%= link_to "Edit", edit_track_url(@track), method: :get %>
+    <%= link_to "Destroy", track_url(@track), method: :delete %>
+    <p>
+      <%= link_to "Album (up one level)", album_url(@track.album), method: :get %>
+    </p>
+    <p>
+      <%= link_to "Add New Track", new_album_track_url(@track.album_id), method: :get %>
+    </p>
+  </p>
+  <%= link_to "<<< All Bands", bands_url, method: :get %>
+</p>

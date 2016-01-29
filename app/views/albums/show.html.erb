@@ -1,0 +1,34 @@
+<% band = Band.find_by(id: @album.band_id) %>
+<h3>Album title: "<%= @album.title %>"</h3>
+
+<p>
+  <h4>Band: <%= band.name %></h4>
+  <h5><%= @album.recorded %> recorded</h5>
+</p>
+
+<p>
+  <h4>Tracks:</h4>
+  <ul>
+    <% @album.tracks.each do |track| %>
+      <li><%= link_to track.title, track_url(track), method: :get %></li>
+    <% end %>
+  </ul>
+</p>
+
+<br>
+<br>
+
+
+<p>
+  <p>
+    <%= link_to "Edit", edit_album_url(@album), method: :get %>
+    <%= link_to "Destroy", album_url(@album), method: :delete %>
+    <p>
+      <%= link_to "Band (up one level)", band_url(@album.band), method: :get %>
+    </p>
+    <p>
+      <%= link_to "Add New Album", new_band_album_url(@album.band_id), method: :get %>
+    </p>
+  </p>
+  <%= link_to "<<< Bands", bands_url, method: :get %>
+</p>

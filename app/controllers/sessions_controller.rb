@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!
-      render json: @user
+      redirect_to bands_url
     end
   end
 

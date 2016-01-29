@@ -8,11 +8,17 @@
 </head>
 <body>
 
+<% if logged_in? %>
+  <h5>Logged in as: <%= current_user.email %></h5>
+<% end %>
+
 <%= yield %>
 
-<p>
-  <%= button_to "Logout", new_session_url, method: :get %>
-</p>
+<% if logged_in? %>
+  <p>
+    <%= button_to "Logout", session_url, method: :delete %>
+  </p>
+<% end %>
 
 </body>
 </html>

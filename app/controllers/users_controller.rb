@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string           not null
+#  session_token   :string           not null
+#  password_digest :string           not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class UsersController < ApplicationController
 
   def new
@@ -7,10 +19,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.password = params[:password]
+
     if @user.save
       login_user!
-      render json: @user
+      redirect_to bands_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
@@ -20,7 +32,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :session_token)
+    params.require(:user).permit(:email, :password)
   end
 
 end
