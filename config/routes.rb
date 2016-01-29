@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   resources :tracks, except: [:index, :new]
 
+  resources :notes, except: [:index]
+
 end

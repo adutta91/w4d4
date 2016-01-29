@@ -32,3 +32,11 @@ Album.all.each do |album|
     t.save!
   end
 end
+
+Track.all.each do |track|
+  n = Note.new
+  n.user_id = 1
+  n.track_id = track.id
+  n.text = ('a'..'z').to_a.sample * 5
+  n.save!
+end

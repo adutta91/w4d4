@@ -45,14 +45,11 @@
       </option>
     <% end %>
   </select>
-
-
   <br>
   <br>
-  <% @album.band_id = params[:band_id] %>
   <input type="submit" value="<%= submit_string %>">
 </form>
 
 <p>
-  <%= link_to "<<< Bands", albums_url, method: :get %>
+  <%= link_to "<<< Back to bands", bands_url, method: :get %>
 </p>

@@ -1,0 +1,58 @@
+<%= render 'shared/errors' %>
+
+<% action = @track.persisted? ? track_url(@track) : tracks_url %>
+<% submit_string = @track.persisted? ? "Edit" : "Enter" %>
+<% method = @track.persisted? ? "PATCH" : "POST" %>
+
+<form action="<%= action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+
+  <label for="track_title">Name</label>
+  <input type="text" name="track[title]" value="<%= @track.title %>">
+  <br>
+
+  <label for="bonus_track">Bonus track</label>
+  <input
+    type="radio"
+    name="track[style]"
+    value="bonus"
+    id="bonus_track"
+    <%= @track.style == "bonus" ? "checked" : "" %>>
+  <br>
+
+  <label for="regular_track">Regular track</label>
+  <input
+    type="radio"
+    name="track[style]"
+    value="regular"
+    id="regular_track"
+    <%= @track.style == "regular" ? "checked" : "" %>>
+  <br>
+
+  <label for="album">Album</label>
+  <select name="track[album_id]" id="album">
+    <option></option>
+    <% Album.all.each do |album| %>
+      <option
+        <%= @track.album == album ? "selected" : "" %>
+        value="<%= album.id %>">
+        <%= album.title %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+  <br>
+
+  <label for="lyrics">Lyrics</label>
+  <textarea name="track[lyrics]"><%= @track.lyrics %></textarea>
+
+<br>
+<br>
+
+  <input type="submit" value="<%= submit_string %>">
+</form>
+
+<p>
+  <%= link_to "<<< Back to bands", bands_url, method: :get %>
+</p>
